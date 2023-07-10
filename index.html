@@ -1,17 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/f8e31c005b.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-    <link rel="stylesheet" href="develop/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
+    <link rel="stylesheet" href="External_Code/style.css" />
     <title>Weather, at a Drop</title>
 </head>
+
 <body>
+    <header class="hero is-small is-link">
+        <div class="hero-body has-text-centered">
+            <p class="title">Weather</p>
+            <p class="subtitle">at a drop 💧</p>
+        </div>
+    </header>
+    <section class="container">
+        <div class="columns is-multiline" style="padding-top: 2rem">
+            <div class="box column is-3 ml-4">
+                <form class="field box" id="search-input">
+                    <label class="label">City Search</label>
+                    <div class="control has-icons-left has-icons-right">
+                        <input id="city" class="input" type="text" placeholder="i.e Atlanta, Dallas, Los Angeles">
+                        <span class="icon is-small is-left">
+                            <i class="fa-solid fa-magnifying-glass-location"></i>
+                        </span>
+                    </div>
+                    <div class="control">
+                        <button class="button is-link is-fullwidth has-text-centered" id="search-btn">Search</button>
+                    </div>
+                </form>
+                <div id="searched-cities" class="box mt-3">
+                    <label class="label">Previous Cities:</label>
+                    <div id="past-cities" class="buttons">
 
+                    </div>
+                </div>
+            </div>
+            <div class="box column ml-2 mr-4" id="current-forecast">
+                <p class="bd-notification is-info title is-5">
+                    <span id="city-value"></span>
+                </p>
+                <div class="weather-icon"></div>
+                <p class="subtitle is-6">
+                    Temp(F): <span id="temp"></span><br>
+                    Wind: <span id="wind"></span><br>
+                    Humidity: <span id="humidity"></span><br>
+                    UV-index: <span id="uv-index" class=""></span><br>
+                </p>
+                <div class="" id="five-day-container">
+                    <p class="bd-notification is-info title is-5">5-Day Forecast</p>
+                    <div class="columns is-3 mr-1 ml-1" id="forecast-cards">
+                        <div class="column mx-1 card has-background-info-dark" id="date-1">
+                            <p class="has-text-white">stuff</p>
+                        </div>
+                        <div class="column mx-1 card has-background-info-dark" id="date-2">
+                            <p class="has-text-white">stuff</p>
+                        </div>
+                        <div class="column mx-1 card has-background-info-dark" id="date-3">
+                            <p class="has-text-white">stuff</p>
+                        </div>
+                        <div class="column mx-1 card has-background-info-dark" id="date-4">
+                            <p class="has-text-white">stuff</p>
+                        </div>
+                        <div class="column mx-1 card has-background-info-dark" id="date-5">
+                            <p class="has-text-white">stuff</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-
-<script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script> 
+        <script src="https://code.jquery.com/jquery-3.7.0.js"
+            integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+        <script src="External_Code/script.js"></script>
 </body>
+
 </html>
