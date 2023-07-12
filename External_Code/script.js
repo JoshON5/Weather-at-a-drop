@@ -64,7 +64,7 @@ var getWeather = function(lat, lon) {
                 var epochDate = data.list[0].dt
 
                 var dateRaw = new Date(epochDate*1000)
-                var formattedDate = (dateRaw.getUTCMonth()) + '-' + dateRaw.getUTCDate() + '-' + dateRaw.getUTCFullYear()
+                var formattedDate = (dateRaw.getUTCMonth() + 1) + '-' + dateRaw.getUTCDate() + '-' + dateRaw.getUTCFullYear()
                 
                 
                 displayCityEl.innerHTML = cityName + " ("+formattedDate+") "
@@ -72,8 +72,9 @@ var getWeather = function(lat, lon) {
                 var weatherImg = document.querySelector(".weather-icon");
                 weatherImg.innerHTML ="<img" + " src=" + "http://openweathermap.org/img/wn/"+icondId+"@2x.png>"
                 
-                
-                tempEl.innerHTML = tempVal + " °F"
+                var tempRound = Math.round(tempVal)
+
+                tempEl.innerHTML = tempRound + " \xB0" + "F"
                 windEl.innerHTML = windVal + " mph"
                 humidityEl.innerHTML = humidityVal + " %"
 
