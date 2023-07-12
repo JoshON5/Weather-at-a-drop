@@ -87,12 +87,50 @@ var getWeather = function (lat, lon) {
 
 		function displayForecast(data) {
 			console.log(data.list[7].wind.speed)
-			var cardOneTitle = document.querySelector('#date-1')
-			cardOneTitle.innerHTML = data.city.name;
+
+			for (var i = 1; i < data.list.length; i+=8) {
+				var forecastCard = document.createElement("div")
+				forecastCard.setAttribute("class", "column mx-1 card has-background-info-dark")
+				var forecastCardTitle = document.createElement('p')
+				forecastCardTitle.setAttribute("class", "title has-text-white")
+				var forecastDate = document.createElement('p')
+				forecastDate.setAttribute("class", "has-text-white")
+				var forecastIcon = document.createElement('img')
+				var forecastTemp = document.createElement('p')
+				forecastTemp.setAttribute("class", "has-text-white")
+				var forecastWind = document.createElement('p')
+				forecastWind.setAttribute("class", "has-text-white")
+				var forecastHumidity = document.createElement('p')
+				forecastHumidity.setAttribute("class", "has-text-white")
+
+				var date = data.list[i].dt
+				var dateRaw = new Date(date * 1000)
+				var forecastDateEl = dateRaw.getUTCMonth() +
+				1 +
+				"-" +
+				dateRaw.getUTCDate() +
+				"-" +
+				dateRaw.getUTCFullYear()
+
+				var forecastIconUrl = data.list[i].weather[0].icon
+
+				var temp = data.list[i].main.temp;
+				var tempRound = Math.round(temp)
+
+				forecastCardTitle.innerHTML = data.city.name;
+				forecastDate.textContent = forecastDateEl;
+				forecastIcon.setAttribute("src", "http://openweathermap.org/img/wn/"+forecastIconUrl+"@2x.png");
+				forecastTemp.textContent = "Temp: " + tempRound + " \xB0" + "F";
+				forecastWind.textContent = "Wind: " + data.list[i].wind.speed + " mph";
+				forecastHumidity.textContent = "Humidity: " + data.list[i].main.humidity + " %";
+
+				forecastCard.append(forecastCardTitle, forecastDate, forecastIcon, forecastTemp, forecastWind, forecastHumidity)
+				forecastCardsEl.append(forecastCard);
+			}
 
 		}
-		// displayWeather();
-		// for (var i = 0; i < data.list[0].main.length; i++) {
+
+		// for (var i = 0; i < data.list[]; i++) {
 		//     console.log(main)
 		//     var temp = main[i].temp + "°F";
 		//     var humidity = main[i].humidity;
@@ -100,6 +138,7 @@ var getWeather = function (lat, lon) {
 		//     humidityEl.innerHTML = humidity;
 		// }
 	});
+
 	// var displayWeather = function(weather, main) {
 
 	//     // for (var i = 0; i < main.length; i++) {
@@ -112,10 +151,25 @@ var getWeather = function (lat, lon) {
 	// }
 };
 
+function setSearchHistory() {
+
+	var searchHistory = JSON.parse(localStorage.getItem("searchHistory")) || [];
+	console.log(currentCityEl.value);
+	console.log(searchHistory);
+	if (!searchHistory.includes(currentCityEl.value)) {
+		searchHistory.push(currentCityEl.value)
+		localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
+
+	}
+	
+	
+}
+
 function formSubmitHandler(event) {
 	event.preventDefault();
 	var search = currentCityEl.value.trim();
 	getCoordinates(search);
+	setSearchHistory();
 }
 
 userValueEl.addEventListener("submit", formSubmitHandler);
