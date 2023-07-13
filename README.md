@@ -19,4 +19,4 @@ With assistance from : </br>
 Scott Everett for the dynamic card elements for JavaScript </br>
 TA Jason Whitney </br>
 code referenced from stack overflow <a href="https://stackoverflow.com/questions/19775488/javascript-how-to-convert-epoch-to-dd-mm-yyyy" target="_blank"></a></br>
-ask BCS assistance on JavaScript
+ask BCS assistance on JavaScript line 86.

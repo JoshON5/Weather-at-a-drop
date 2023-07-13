@@ -1,10 +1,5 @@
 var key = "6a6cbc32f4561808ace2b90501c16235";
-// var errorMssg = (response) => {
-//     if (!response.ok) {
-//         throw Error(response.statusText)
-//     }
-//     return response;
-// })
+
 var userValueEl = document.querySelector("#search-input");
 var searchButtonEl = document.querySelector("#search-btn");
 var currentCityEl = document.querySelector("#city");
@@ -19,9 +14,9 @@ var tempEl = document.querySelector("#temp");
 var windEl = document.querySelector("#wind");
 var humidityEl = document.querySelector("#humidity");
 var uvEl = document.querySelector("#uv-index");
-
+// empty array to use for user history value to be inputted
 var userHistory = [];
-
+// function to fetch the API for the city name searched and get the data for the longitude and latitude.
 function getCoordinates(city) {
 	var api =
 		"https://api.openweathermap.org/data/2.5/weather?q=" +
@@ -38,7 +33,7 @@ function getCoordinates(city) {
 			getWeather(data.coord.lat, data.coord.lon);
 		});
 }
-
+// calling the getweather function that holds the path to the longitude and longitude to then input to the API for displaying the data we want.
 var getWeather = function (lat, lon) {
 	var url =
 		"https://api.openweathermap.org/data/2.5/forecast?lat=" +
@@ -49,15 +44,14 @@ var getWeather = function (lat, lon) {
 	fetch(url).then(function (response) {
 		if (response.ok) {
 			response.json().then(function (data) {
-				console.log(data);
-				// displayWeather(data.list[0])
+				// creating variables that gets the info corresponding to that specific info to hold.
 				var cityName = data.city.name;
 				var tempVal = data.list[0].main.temp;
 				var windVal = data.list[0].wind.speed;
 				var humidityVal = data.list[0].main.humidity;
 				var icondId = data.list[0].weather[0].icon;
 				var epochDate = data.list[0].dt;
-
+				// used to convert the Unix time and format it to display only the ("MM-DD-YYYY") format.
 				var dateRaw = new Date(epochDate * 1000);
 				var formattedDate =
 					dateRaw.getUTCMonth() +
@@ -68,7 +62,7 @@ var getWeather = function (lat, lon) {
 					dateRaw.getUTCFullYear();
 
 				displayCityEl.innerHTML = cityName + " (" + formattedDate + ") ";
-
+				// creating a variable that holds where the icon will be displayed in the HTML and writing how it will be dynamically inputted in.
 				var weatherImg = document.querySelector(".weather-icon");
 				weatherImg.innerHTML =
 					"<img" +
@@ -76,13 +70,13 @@ var getWeather = function (lat, lon) {
 					"http://openweathermap.org/img/wn/" +
 					icondId +
 					"@2x.png>";
-
+				// Rounding out the temperature for a cleaner look.
 				var tempRound = Math.round(tempVal);
 
 				tempEl.innerHTML = tempRound + " \xB0" + "F";
 				windEl.innerHTML = windVal + " mph";
 				humidityEl.innerHTML = humidityVal + " %";
-
+				
 				displayForecast(data);
 			});
 		}
@@ -90,8 +84,9 @@ var getWeather = function (lat, lon) {
 		function displayForecast(data) {
 			console.log(data.list[7].wind.speed);
 			forecastCardsEl.innerHTML = "";
-
+			// creating a for loop that goes through every 8 in the list since it's formatted by every 3 hours to have a forecast in the API.
 			for (var i = 1; i < data.list.length; i += 8) {
+				// creating elements that will be dynamically inserted into the HTML for each card a seperate day.
 				var forecastCard = document.createElement("div");
 				forecastCard.setAttribute(
 					"class",
@@ -149,7 +144,7 @@ var getWeather = function (lat, lon) {
 	});
 };
 
-
+// creating a function that will create the search values as buttons and appending them to the previous cities element in the HTML.
 function displayHistory() {
 	userHistoryEl.innerHTML = "";
 	for (var i = 0; i <= userHistory.length - 1; i++) {
@@ -161,7 +156,7 @@ function displayHistory() {
 		userHistoryEl.append(searchButtonEl);
 	}
 }
-
+// setting the local storage.
 function setHistory(info) {
 
 	if (!userHistory.includes(currentCityEl.value)) {
@@ -170,7 +165,7 @@ function setHistory(info) {
 	}
 	displayHistory();
 }
-
+// getting the local storage and running the display history function.
 function getHistory() {
 	var storageHistory = localStorage.getItem("id");
 	if (storageHistory) {
@@ -178,7 +173,7 @@ function getHistory() {
 	}
 	displayHistory();
 }
-
+// creating a click event for the search button that begins to run the functions for getting the weather and creating the previous cities element and also displaying the hidden elements.
 function formSubmitHandler(event) {
 	event.preventDefault();
 	var search = currentCityEl.value.trim();
@@ -187,7 +182,7 @@ function formSubmitHandler(event) {
 	fiveDayEl.setAttribute("style", "display: block")
 	pastCitiesEl.setAttribute("style", "display: block")
 }
-
+// button event for the previous searched cities element.
 function historyHandler (event) {
 	if (!event.target.matches("button")) {
 	  return;
