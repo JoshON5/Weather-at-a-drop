@@ -44,6 +44,7 @@ var getWeather = function (lat, lon) {
 	fetch(url).then(function (response) {
 		if (response.ok) {
 			response.json().then(function (data) {
+				console.log(data)
 				// creating variables that gets the info corresponding to that specific info to hold.
 				var cityName = data.city.name;
 				var tempVal = data.list[0].main.temp;
@@ -52,7 +53,7 @@ var getWeather = function (lat, lon) {
 				var icondId = data.list[0].weather[0].icon;
 				var epochDate = data.list[0].dt;
 				// used to convert the Unix time and format it to display only the ("MM-DD-YYYY") format.
-				var dateRaw = new Date(epochDate * 1000);
+				var dateRaw = new Date(epochDate * 1000 - 28800);
 				var formattedDate =
 					dateRaw.getUTCMonth() +
 					1 +
