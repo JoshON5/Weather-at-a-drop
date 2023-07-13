@@ -133,60 +133,14 @@ var getWeather = function (lat, lon) {
 
 		}
 
-		// for (var i = 0; i < data.list[]; i++) {
-		//     console.log(main)
-		//     var temp = main[i].temp + "°F";
-		//     var humidity = main[i].humidity;
-		//     tempEl.innerHTML = temp;
-		//     humidityEl.innerHTML = humidity;
-		// }
 	});
 
-	// var displayWeather = function(weather, main) {
 
-	//     // for (var i = 0; i < main.length; i++) {
-	//     //     console.log(main)
-	//     //     var temp = main[i].temp + "°F";
-	//     //     var humidity = main[i].humidity;
-	//     //     tempEl.innerHTML = temp;
-	//     //     humidityEl.innerHTML = humidity;
-	//     // }
-	// }
 };
 
-function setSearchHistory() {
 
-	var searchHistory = JSON.parse(localStorage.getItem("searchHistory")) || [];
-	console.log(currentCityEl.value);
-	console.log(searchHistory);
-	if (!searchHistory.includes(currentCityEl.value)) {
-		searchHistory.push(currentCityEl.value)
-		localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
-		displaySearchHistory();
-	}
-	
-	
-}
 
-function getSearchHistory() {
-	var storageHistory = localStorage.getItem("searchHistory");
-	if (storageHistory) {
-	  userHistory = JSON.parse(storageHistory);
-	} 
-	displaySearchHistory();
-}
 
-function displaySearchHistory() {
-	userHistoryEl.innerHTML = "";
-	for (var i = 0; i < userHistory.length -1; i++) {
-		var searchButtonEl = document.createElement("button");
-		searchButtonEl.setAttribute("type", "button")
-		searchButtonEl.classList = "button is-info is-fullwidth";
-		searchButtonEl.setAttribute("searchHistory", userHistory[i])
-		searchButtonEl.textContent = userHistory[i];
-		userHistoryEl.append(searchButtonEl);
-	}
-}
 
 function formSubmitHandler(event) {
 	event.preventDefault();
@@ -195,5 +149,5 @@ function formSubmitHandler(event) {
 	setSearchHistory(search);
 }
 
-setSearchHistory();
+
 userValueEl.addEventListener("submit", formSubmitHandler);
