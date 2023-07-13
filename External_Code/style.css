@@ -1,3 +1,8 @@
 #forecastContainer {
     padding-top: 2rem;
 }
+
+.fiveDayContainer, #searched-cities {
+    display: none;
+}
+

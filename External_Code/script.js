@@ -11,6 +11,8 @@ var currentCityEl = document.querySelector("#city");
 var displayCityEl = document.querySelector("#city-value");
 var displayDateEl = document.querySelector("#date");
 var weatherContainerEl = document.querySelector("#five-day-container");
+var fiveDayEl = document.querySelector(".fiveDayContainer")
+var pastCitiesEl = document.querySelector("#searched-cities");
 var userHistoryEl = document.querySelector("#past-cities");
 var forecastCardsEl = document.querySelector("#forecast-cards");
 var tempEl = document.querySelector("#temp");
@@ -182,6 +184,8 @@ function formSubmitHandler(event) {
 	var search = currentCityEl.value.trim();
 	getCoordinates(search);
 	setHistory(search);
+	fiveDayEl.setAttribute("style", "display: block")
+	pastCitiesEl.setAttribute("style", "display: block")
 }
 
 function historyHandler (event) {
