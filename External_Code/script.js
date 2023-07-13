@@ -6,7 +6,7 @@ var currentCityEl = document.querySelector("#city");
 var displayCityEl = document.querySelector("#city-value");
 var displayDateEl = document.querySelector("#date");
 var weatherContainerEl = document.querySelector("#five-day-container");
-var fiveDayEl = document.querySelector(".fiveDayContainer")
+var fiveDayEl = document.querySelector(".fiveDayContainer");
 var pastCitiesEl = document.querySelector("#searched-cities");
 var userHistoryEl = document.querySelector("#past-cities");
 var forecastCardsEl = document.querySelector("#forecast-cards");
@@ -76,7 +76,7 @@ var getWeather = function (lat, lon) {
 				tempEl.innerHTML = tempRound + " \xB0" + "F";
 				windEl.innerHTML = windVal + " mph";
 				humidityEl.innerHTML = humidityVal + " %";
-				
+
 				displayForecast(data);
 			});
 		}
@@ -158,10 +158,9 @@ function displayHistory() {
 }
 // setting the local storage.
 function setHistory(info) {
-
 	if (!userHistory.includes(currentCityEl.value)) {
-	userHistory.push(info);
-	localStorage.setItem("id", JSON.stringify(userHistory));
+		userHistory.push(info);
+		localStorage.setItem("id", JSON.stringify(userHistory));
 	}
 	displayHistory();
 }
@@ -179,18 +178,18 @@ function formSubmitHandler(event) {
 	var search = currentCityEl.value.trim();
 	getCoordinates(search);
 	setHistory(search);
-	fiveDayEl.setAttribute("style", "display: block")
-	pastCitiesEl.setAttribute("style", "display: block")
+	fiveDayEl.setAttribute("style", "display: block");
+	pastCitiesEl.setAttribute("style", "display: block");
 }
 // button event for the previous searched cities element.
-function historyHandler (event) {
+function historyHandler(event) {
 	if (!event.target.matches("button")) {
-	  return;
+		return;
 	}
 	var buttonClick = event.target;
 	var search = buttonClick.getAttribute("data-search");
 	getCoordinates(search);
-  };
+}
 
 getHistory();
 
