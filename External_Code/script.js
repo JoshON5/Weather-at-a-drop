@@ -138,7 +138,19 @@ var getWeather = function (lat, lon) {
 
 };
 
+function setSearchHistory() {
 
+	var searchHistory = JSON.parse(localStorage.getItem("searchHistory")) || [];
+	console.log(currentCityEl.value);
+	console.log(searchHistory);
+	if (!searchHistory.includes(currentCityEl.value)) {
+		searchHistory.push(currentCityEl.value)
+		localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
+
+	}
+	
+	
+}
 
 
 
