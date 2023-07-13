@@ -87,6 +87,7 @@ var getWeather = function (lat, lon) {
 
 		function displayForecast(data) {
 			console.log(data.list[7].wind.speed)
+			forecastCardsEl.innerHTML = "";
 
 			for (var i = 1; i < data.list.length; i+=8) {
 				var forecastCard = document.createElement("div")
@@ -127,6 +128,8 @@ var getWeather = function (lat, lon) {
 				forecastCard.append(forecastCardTitle, forecastDate, forecastIcon, forecastTemp, forecastWind, forecastHumidity)
 				forecastCardsEl.append(forecastCard);
 			}
+
+
 
 		}
 
