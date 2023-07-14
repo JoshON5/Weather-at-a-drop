@@ -53,7 +53,8 @@ var getWeather = function (lat, lon) {
 				var icondId = data.list[0].weather[0].icon;
 				var epochDate = data.list[0].dt;
 				// used to convert the Unix time and format it to display only the ("MM-DD-YYYY") format.
-				var dateRaw = new Date(epochDate * 1000 - 28800);
+				var dateRaw = new Date(epochDate * 1000 - 14400000);
+				console.log(dateRaw)
 				var formattedDate =
 					dateRaw.getUTCMonth() +
 					1 +
