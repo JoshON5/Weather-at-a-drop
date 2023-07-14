@@ -158,9 +158,9 @@ function displayHistory() {
 	}
 }
 // setting the local storage.
-function setHistory(info) {
+function setHistory(cityInfo) {
 	if (!userHistory.includes(currentCityEl.value)) {
-		userHistory.push(info);
+		userHistory.push(cityInfo);
 		localStorage.setItem("id", JSON.stringify(userHistory));
 	}
 	displayHistory();
